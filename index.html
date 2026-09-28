@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Aether · Workflow Protocol</title>
+  <style>
+    :root { color-scheme: light; --bg:#f7f8fa; --paper:#fff; --ink:#26394b; --muted:#52677a; --line:#d8dce6; --link:#17668c; --accent:#a8322b; }
+    * { box-sizing:border-box; }
+    body { margin:0; background:var(--bg); color:var(--ink); font:16px/1.8 -apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif; }
+    a { color:var(--link); text-underline-offset:4px; }
+    a:hover { color:var(--accent); }
+    a:focus-visible { outline:3px solid var(--link); outline-offset:5px; }
+    code { font-family:"SFMono-Regular",Consolas,monospace; font-size:.9em; overflow-wrap:anywhere; }
+    .page { max-width:1080px; padding:28px 32px 60px; margin:auto; }
+    header { display:flex; align-items:center; justify-content:space-between; gap:20px; padding-bottom:24px; border-bottom:1px solid var(--line); }
+    .brand { font-weight:700; font-size:20px; }
+    header a { font-size:14px; }
+    main { display:grid; grid-template-columns:180px minmax(0,1fr); gap:48px; padding-top:48px; }
+    aside { color:var(--muted); font-size:14px; }
+    aside nav { display:grid; gap:12px; position:sticky; top:24px; }
+    aside a { text-decoration:none; }
+    h1 { font-size:clamp(30px,5vw,46px); letter-spacing:-.035em; line-height:1.25; margin:0 0 20px; }
+    h2 { font-size:23px; margin:0 0 16px; }
+    h3 { font-size:18px; margin:0 0 4px; }
+    p { margin:0 0 16px; }
+    .lead { font-size:18px; max-width:38em; color:var(--muted); }
+    section { margin-top:42px; scroll-margin-top:24px; }
+    .resource { display:grid; grid-template-columns:1fr auto; gap:12px; align-items:center; padding:22px 0; border-top:1px solid var(--line); }
+    .resource p { margin:0; color:var(--muted); font-size:15px; }
+    .resource a { white-space:nowrap; font-weight:600; }
+    .protocol { margin-top:28px; padding:22px 26px; background:var(--paper); border-left:3px solid var(--accent); }
+    .protocol code { display:block; line-height:1.9; }
+    dl { display:grid; grid-template-columns:150px 1fr; gap:12px 20px; margin:0; }
+    dt { font-weight:600; } dd { margin:0; color:var(--muted); }
+    .note { padding:20px 24px; background:#eaf0f5; border-radius:6px; }
+    .note p:last-child { margin-bottom:0; }
+    footer { margin-top:48px; border-top:1px solid var(--line); padding-top:20px; color:var(--muted); font-size:13px; }
+    @media(max-width:680px) { .page { padding:20px; } main { grid-template-columns:1fr; gap:28px; padding-top:28px; } aside nav { display:flex; flex-wrap:wrap; gap:12px 24px; } .resource { grid-template-columns:1fr; } dl { grid-template-columns:1fr; gap:4px; } dd { margin-bottom:12px; } }
+    @media print { aside,header a { display:none; } main { display:block; } body { background:white; } }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header><span class="brand">Aether</span><a href="https://github.com/BabySid/aether">Go reference implementation</a></header>
+    <main>
+      <aside><nav aria-label="Documentation navigation"><a href="#resources">Protocol resources</a><a href="#structure">Reading guide</a><a href="#scope">Version and scope</a></nav></aside>
+      <article>
+        <h1>Workflows begin with a declaration.</h1>
+        <p class="lead">The Graph Workflow Protocol describes tasks, dependencies, and parameter bindings in workflow documents. This repository provides structural definitions and field references for <code>aether/v1</code>, for workflow authors and runtime implementers.</p>
+        <div class="protocol" aria-label="Protocol structure overview"><code>apiVersion: aether/v1</code><code>kind: Workflow | CronWorkflow</code><code>spec.templates: dag | task | loop</code></div>
+        <section id="resources">
+          <h2>Protocol resources</h2>
+          <div class="resource"><div><h3>Field reference</h3><p>Browse from top-level resources to primitive types, with type links, search, and collapsible sections.</p></div><a href="docs/schema.html">Read the reference</a></div>
+          <div class="resource"><div><h3>JSON Schema</h3><p>A Draft-07 schema for validating workflow document structure and field constraints.</p></div><a href="schema/v1/graph-schema.json" download>Download Schema</a></div>
+        </section>
+        <section id="structure">
+          <h2>Reading guide</h2>
+          <dl>
+            <dt>Resources</dt><dd><a href="docs/schema.html#Workflow">Workflow</a> describes a workflow; <a href="docs/schema.html#CronWorkflow">CronWorkflow</a> describes its schedule and workflow definition.</dd>
+            <dt>Templates</dt><dd><a href="docs/schema.html#DAG">DAG</a> organizes dependencies, <a href="docs/schema.html#Task">Task</a> describes a task, and <a href="docs/schema.html#Loop">Loop</a> describes iteration.</dd>
+            <dt>Inputs and outputs</dt><dd>Use the field reference to explore parameter declarations, argument bindings, outputs, and artifacts.</dd>
+          </dl>
+        </section>
+        <section id="scope">
+          <h2>Version and scope</h2>
+          <p>The protocol identifier is <code>aether/v1</code> and the Schema version is <code>1.0.0</code>. This repository maintains the Schema and field reference.</p>
+          <div class="note"><p>The Schema describes document structure. A field appearing in the Schema does not imply that every runtime implements its behavior.</p><p>This repository currently provides structural definitions and a field reference. Complete execution semantics and conformance cases have not yet been documented. Check the reference implementation for runtime support.</p></div>
+        </section>
+        <footer>Read offline with no build step. Code and documentation are available under the <a href="LICENSE">BSD 3-Clause License</a>.</footer>
+      </article>
+    </main>
+  </div>
+</body>
+</html>
